@@ -1,18 +1,20 @@
 import React from 'react';
+import aroundtheus from "./images/aroundtheus.svg";
 import './index.css';
 
 function App() {
   return (
     <body className="page">
     <header className="header">
-        <img className="header__img" src="<%=require('./images/aroundtheus.svg')%>" alt="Around the U.S." />
+        <img className="header__img" src={aroundtheus} alt="Around the U.S." />
     </header>
 
     <main>
         <section className="profile">
             <div className="profile__image-container">
-                <img className="profile__pic" src="<%=require('./images/coronado.jpg')%>" alt="profile image"/>
-                <img className="profile__pic-edit" src="<%=require('./images/edit-avatar-button.png')%>" alt="edit avatar button"/>
+                <img className="profile__pic" src="./images/coronado.jpg" alt="profile image"/>
+                {/* webpack version "<%=require('./images/coronado.jpg')%>" */}
+                <img className="profile__pic-edit" src="./images/edit-avatar-button.png" alt="edit avatar button"/>
             </div>
             <div className="profile__text">
                 <div className="profile__top-row">
