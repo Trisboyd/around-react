@@ -1,8 +1,8 @@
 import React from 'react';
 import AppHeader from './Header';
-import AppMain from '.Main';
+import AppMain from './Main';
 import AppFooter from './Footer';
-import './index.css';
+import '../index.css';
 
 function App() {
     return (
@@ -29,14 +29,14 @@ function App() {
             <section className="popup popup_profile-edit">
                 <div className="popup__container">
                     <button className="popup__exit popup__exit_edit-profile" type="button" aria-label="exit"></button>
-                    <form className="edit-box edit-box_profile" name="edit-box" novalidate>
+                    <form className="edit-box edit-box_profile" name="edit-box" noValidate>
                         <h3 className="edit-box__title">Edit profile</h3>
                         <input type="text" value="Francisco Coronado" id="profile-name"
-                            className="edit-box__text edit-box__text_type_name" name="name" minlength="2" maxlength="40" required />
+                            className="edit-box__text edit-box__text_type_name" name="name" minLength="2" maxLength="40" required />
                         <span className="edit-box__text-error edit-box__text-error_type_name" id="profile-name-error"></span>
                         <input type="text" value="Conquistador" id="profile-descriptor"
-                            className="edit-box__text edit-box__text_type_descriptor" name="descriptor" minlength="2"
-                            maxlength="200" required />
+                            className="edit-box__text edit-box__text_type_descriptor" name="descriptor" minLength="2"
+                            maxLength="200" required />
                         <span className="edit-box__text-error edit-box__text-error_type_descriptor"
                             id="profile-descriptor-error"></span>
                         <button type="submit" id="profile-submit" className="edit-box__submit" name="edit-box-submit"
@@ -48,10 +48,10 @@ function App() {
             <section className="popup popup_add-place">
                 <div className="popup__container">
                     <button className="popup__exit popup__exit_add-place" type="button" aria-label="exit"></button>
-                    <form className="edit-box edit-box_place" name="edit-box" novalidate>
+                    <form className="edit-box edit-box_place" name="edit-box" noValidate>
                         <h3 className="edit-box__title">New place</h3>
                         <input type="text" placeholder="Title" id="place-title" value=""
-                            className="edit-box__text edit-box__text_type_name" name="name" minlength="1" maxlength="30" required />
+                            className="edit-box__text edit-box__text_type_name" name="name" minLength="1" maxLength="30" required />
                         <span className="edit-box__text-error edit-box__text-error_type_place-title" id="place-title-error"></span>
                         <input type="url" placeholder="Image link" id="image-link" value=""
                             className="edit-box__text edit-box__text_type_descriptor" name="link" required />
