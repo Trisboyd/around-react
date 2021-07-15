@@ -1,35 +1,10 @@
 import React from 'react';
 import AppHeader from './Header';
 import AppMain from './Main';
-import PopupWithImage from './PopupWithImage';
 import AppFooter from './Footer';
 import '../index.css';
 
 function App() {
-
-    const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
-    const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
-    const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-
-    function handleEditAvatarClick(){
-        setIsEditAvatarPopupOpen(true);
-        // const avatarPopup = document.querySelector(".popup_avatar");
-        // avatarPopup.classList.add("popup_visible");
-    }
-
-    function handleEditProfileClick(){
-        setIsEditProfilePopupOpen(true);
-        // const editProfilePopup = document.querySelector(".popup_profile-edit");
-        // editProfilePopup.classList.add("popup_visible");
-    }
-
-    function handleAddPlaceClick(){
-        setIsAddPlacePopupOpen(true);
-        // const addPlacePopup = document.querySelector(".popup_add-place");
-        // addPlacePopup.classList.add("popup_visible");
-    }
-
-
     return (
         <body className="page">
             <AppHeader />
@@ -87,7 +62,13 @@ function App() {
                 </div>
             </section>
 
-            <PopupWithImage />
+            <section className="popup popup_image">
+                <div className="popup-image-container">
+                    <button className="popup__exit popup__exit_image" type="button" aria-label="exit"></button>
+                    <img className="popup-image-container__pic" src="<%=require('./images/clipping_picture.png')%>" alt="landscape" />
+                    <p className="popup-image-container__title"></p>
+                </div>
+            </section>
 
             <section className="popup popup_card-delete">
                 <div className="popup__container">

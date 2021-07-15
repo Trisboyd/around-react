@@ -4,7 +4,21 @@ import editAvatarButton from '../images/edit-avatar-button.png';
 
 function AppMain() {
 
-    
+    function handleEditAvatarClick(){
+        const avatarPopup = document.querySelector(".popup_avatar");
+        avatarPopup.classList.add("popup_visible");
+    }
+
+
+    function handleEditProfileClick(){
+        const editProfilePopup = document.querySelector(".popup_profile-edit");
+        editProfilePopup.classList.add("popup_visible");
+    }
+
+    function handleAddPlaceClick(){
+        const addPlacePopup = document.querySelector(".popup_add-place");
+        addPlacePopup.classList.add("popup_visible");
+    }
 
 
     return (
