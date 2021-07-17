@@ -1,14 +1,54 @@
 import React from 'react';
 import AppHeader from './Header';
 import AppMain from './Main';
+import EditProfilePopup from "./EditProfilePopup";
+import EditAvatarPopup from "./EditAvatarPopup";
+import AddPlacePopup from "./AddPlacePopup";
+import ConfirmDeletePopup from './ConfirmDeletePopup';
+import PopupWithImage from './PopupWithImage';
 import AppFooter from './Footer';
 import '../index.css';
 
+
 function App() {
+
+    const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+    const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+    const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+    const [isConfirmDeletePopupOpen, setisConfirmDeletePopupOpen] = React.useState(false);
+
+    function handleEditAvatarClick() {
+        setIsEditAvatarPopupOpen(true);
+    }
+
+    function handleEditProfileClick() {
+        setIsEditProfilePopupOpen(true);
+    }
+
+    function handleAddPlaceClick() {
+        setIsAddPlacePopupOpen(true);
+    }
+
+    function closeAllPopups() {
+        setIsAddPlacePopupOpen(false);
+        setIsEditAvatarPopupOpen(false);
+        setIsEditProfilePopupOpen(false);
+        setisConfirmDeletePopupOpen(false);
+    }
+
+
     return (
         <body className="page">
             <AppHeader />
-            <AppMain />
+            <AppMain onEditAvatarClick={handleEditAvatarClick} onEditProfileClick={handleEditProfileClick} 
+            onAddPlaceClick={handleAddPlaceClick}/>
+            <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}/>
+            <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}/>
+            <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}/>
+            <ConfirmDeletePopup isOpen={isConfirmDeletePopupOpen} onClose={closeAllPopups}/>
+
+            // the confirmDeletePopup onClick will be attach to the CARD itself which I still need to do
+
             <AppFooter />
 
             <template id="place-template">
@@ -26,7 +66,7 @@ function App() {
                 </article>
             </template>
 
-            <section className="popup popup_profile-edit">
+            {/* <section className="popup popup_profile-edit">
                 <div className="popup__container">
                     <button className="popup__exit popup__exit_edit-profile" type="button" aria-label="exit"></button>
                     <form className="edit-box edit-box_profile" name="edit-box" noValidate>
@@ -43,9 +83,9 @@ function App() {
                             aria-label="submit" value="Save">Save</button>
                     </form>
                 </div>
-            </section>
+            </section> */}
 
-            <section className="popup popup_add-place">
+            {/* <section className="popup popup_add-place">
                 <div className="popup__container">
                     <button className="popup__exit popup__exit_add-place" type="button" aria-label="exit"></button>
                     <form className="edit-box edit-box_place" name="edit-box" noValidate>
@@ -60,17 +100,11 @@ function App() {
                             aria-label="submit" value="Create">Create</button>
                     </form>
                 </div>
-            </section>
+            </section> */}
 
-            <section className="popup popup_image">
-                <div className="popup-image-container">
-                    <button className="popup__exit popup__exit_image" type="button" aria-label="exit"></button>
-                    <img className="popup-image-container__pic" src="<%=require('./images/clipping_picture.png')%>" alt="landscape" />
-                    <p className="popup-image-container__title"></p>
-                </div>
-            </section>
+            <PopupWithImage />
 
-            <section className="popup popup_card-delete">
+            {/* <section className="popup popup_card-delete">
                 <div className="popup__container">
                     <form className="edit-box edit-box_card-delete" name="edit-box">
                         <button className="popup__exit popup__exit_card-delete" type="button" aria-label="exit"></button>
@@ -79,9 +113,9 @@ function App() {
                             aria-label="submit">Yes</button>
                     </form>
                 </div>
-            </section>
+            </section> */}
 
-            <section className="popup popup_avatar">
+            {/* <section className="popup popup_avatar">
                 <div className="popup__container">
                     <form className="edit-box edit-box_avatar" name="edit-box">
                         <button className="popup__exit popup__exit_change-avatar" type="button" aria-label="exit"></button>
@@ -93,10 +127,12 @@ function App() {
                             aria-label="submit" value="Save">Save</button>
                     </form>
                 </div>
-            </section>
+            </section> */}
+
+
             {/* This script is necessary to avoid a "regenerator-runtime" error. No other solutions to
     this problem were found despite the efforts of multiple people including a senior software developer */}
-            <script src="https://unpkg.com/regenerator-runtime@0.13.1/runtime.js"></script>
+            {/* <script src="https://unpkg.com/regenerator-runtime@0.13.1/runtime.js"></script> */}
         </body>
     );
 }
