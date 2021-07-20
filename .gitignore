@@ -24,4 +24,5 @@ node_modules
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
->>>>>>> feature/popupComponents
+
+node_modules/
