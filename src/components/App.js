@@ -9,7 +9,6 @@ import PopupWithImage from './PopupWithImage';
 import api from "../utils/api";
 import Card from "./Card";
 import AppFooter from './Footer';
-import Places from './Places';
 import '../index.css';
 
 
@@ -49,6 +48,7 @@ function App() {
     const [userName, setUserName] = React.useState();
     const [userDescription, setUserDescription] = React.useState();
     const [userAvatar, setUserAvatar] = React.useState();
+    const [cards, setCards] = React.useState([]);
 
     // function that fetches user info
     function retrieveUserInfo() {
@@ -60,33 +60,19 @@ function App() {
             .catch(err => { console.log(err) })
     }
 
+    function addCards() {
+        api.getCardList().then(res => {
+            setCards([...cards, ...res]);
+        })
+            .catch(err => { console.log(err) })
+    }
+
     // call function using hook's "useEffect"
     React.useEffect(() => {
-        retrieveUserInfo()
+        retrieveUserInfo();
+        addCards();
     }, []);
 
-    // CARDS_____________________________________________________________________________________________
-
-    const [cards, setCards] = React.useState([]);
-
-    // React.useEffect(() => {
-    //     api.getCardList().then(res => {
-    //         console.log("res", res);
-    //         setCards(...cards, res.map(card => ({
-    //             name: card.name,
-    //             link: card.link,
-    //             likes: card.likes,
-    //             id: card._id
-    //         })))
-    //     })
-    // }, [])
-
-    React.useEffect(() => {
-        api.getCardList().then(res => {
-            console.log("res", res);
-            setCards([...cards, res])
-        })
-    }, [])
 
     return (
         <body className="page">
@@ -94,7 +80,7 @@ function App() {
 
             <AppMain name={userName} description={userDescription} avatar={userAvatar} onEditAvatarClick={handleEditAvatarClick} onEditProfileClick={handleEditProfileClick}
                 onAddPlaceClick={handleAddPlaceClick} />
-                <Card cards={cards}/>
+            <Card cards={cards} />
             <AppFooter />
             <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
             <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
@@ -199,7 +185,7 @@ export default App;
 
 // TEST CODE__________________
 
-             {/* <Places/> */}
-            {/* {cards.map(card => {
+{/* <Places/> */ }
+{/* {cards.map(card => {
                 return <Card id={card.id} link={card.link} name={card.name} likes={card.likes.length}></Card>
             })} */}
