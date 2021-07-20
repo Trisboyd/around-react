@@ -6,17 +6,24 @@ import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 import ConfirmDeletePopup from './ConfirmDeletePopup';
 import PopupWithImage from './PopupWithImage';
+import api from "../utils/api";
+import Card from "./Card";
 import AppFooter from './Footer';
+import Places from './Places';
 import '../index.css';
 
 
 function App() {
 
+    // POPUPS_____________________________________________________________________________
+
+    // Hooks for Popups
     const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
     const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
     const [isConfirmDeletePopupOpen, setisConfirmDeletePopupOpen] = React.useState(false);
 
+    // Popup functions for opening and closing
     function handleEditAvatarClick() {
         setIsEditAvatarPopupOpen(true);
     }
@@ -36,22 +43,72 @@ function App() {
         setisConfirmDeletePopupOpen(false);
     }
 
+    // SET PROFILE INFO USING API________________________________________________________________________
+
+    // Hooks for setting profile
+    const [userName, setUserName] = React.useState();
+    const [userDescription, setUserDescription] = React.useState();
+    const [userAvatar, setUserAvatar] = React.useState();
+
+    // function that fetches user info
+    function retrieveUserInfo() {
+        api.getProfile().then(res => {
+            setUserName(res.name);
+            setUserDescription(res.about);
+            setUserAvatar(res.avatar);
+        })
+            .catch(err => { console.log(err) })
+    }
+
+    // call function using hook's "useEffect"
+    React.useEffect(() => {
+        retrieveUserInfo()
+    }, []);
+
+    // CARDS_____________________________________________________________________________________________
+
+    const [cards, setCards] = React.useState([]);
+
+    // React.useEffect(() => {
+    //     api.getCardList().then(res => {
+    //         console.log("res", res);
+    //         setCards(...cards, res.map(card => ({
+    //             name: card.name,
+    //             link: card.link,
+    //             likes: card.likes,
+    //             id: card._id
+    //         })))
+    //     })
+    // }, [])
+
+    React.useEffect(() => {
+        api.getCardList().then(res => {
+            console.log("res", res);
+            setCards([...cards, res])
+        })
+    }, [])
 
     return (
         <body className="page">
             <AppHeader />
-            <AppMain onEditAvatarClick={handleEditAvatarClick} onEditProfileClick={handleEditProfileClick} 
-            onAddPlaceClick={handleAddPlaceClick}/>
-            <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}/>
-            <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}/>
-            <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}/>
-            <ConfirmDeletePopup isOpen={isConfirmDeletePopupOpen} onClose={closeAllPopups}/>
+
+            <AppMain name={userName} description={userDescription} avatar={userAvatar} onEditAvatarClick={handleEditAvatarClick} onEditProfileClick={handleEditProfileClick}
+                onAddPlaceClick={handleAddPlaceClick} />
+                <Card cards={cards}/>
+            <AppFooter />
+            <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
+            <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
+            <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} />
+            <ConfirmDeletePopup isOpen={isConfirmDeletePopupOpen} onClose={closeAllPopups} />
+
+
+
+
+
 
             // the confirmDeletePopup onClick will be attach to the CARD itself which I still need to do
 
-            <AppFooter />
-
-            <template id="place-template">
+            {/* <template id="place-template">
                 <article className="place">
                     <button className="place__trash" type="button" aria-label="trash-button"></button>
                     <img className="place__image" alt="" />
@@ -64,7 +121,7 @@ function App() {
                         </div>
                     </div>
                 </article>
-            </template>
+            </template> */}
 
             {/* <section className="popup popup_profile-edit">
                 <div className="popup__container">
@@ -138,3 +195,11 @@ function App() {
 }
 
 export default App;
+
+
+// TEST CODE__________________
+
+             {/* <Places/> */}
+            {/* {cards.map(card => {
+                return <Card id={card.id} link={card.link} name={card.name} likes={card.likes.length}></Card>
+            })} */}
