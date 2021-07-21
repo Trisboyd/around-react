@@ -2,12 +2,12 @@ import React from 'react';
 import Places from './Places';
 import Card from './Card';
 
-const CardList = ({ cards }) => {
+const CardList = ( props ) => {
 
     return (
         <Places>
                 {
-                    cards.map(card => (
+                    props.cards.map(card => (
                         <Card name={card.name} link={card.link} id={card._id} likes={card.likes.length} />
 
 

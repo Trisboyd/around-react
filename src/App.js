@@ -1,15 +1,15 @@
 import React from 'react';
-import AppHeader from './Header';
-import AppMain from './Main';
-import EditProfilePopup from "./EditProfilePopup";
-import EditAvatarPopup from "./EditAvatarPopup";
-import AddPlacePopup from "./AddPlacePopup";
-import ConfirmDeletePopup from './ConfirmDeletePopup';
-import PopupWithImage from './PopupWithImage';
-import api from "../utils/api";
-import CardList from "./CardList";
-import AppFooter from './Footer';
-import '../index.css';
+import AppHeader from './components/Header';
+import AppMain from './components/Main';
+import EditProfilePopup from "./components/EditProfilePopup";
+import EditAvatarPopup from "./components/EditAvatarPopup";
+import AddPlacePopup from "./components/AddPlacePopup";
+import ConfirmDeletePopup from './components/ConfirmDeletePopup';
+import PopupWithImage from './components/PopupWithImage';
+import api from "./utils/api";
+import CardList from "./components/CardList";
+import AppFooter from './components/Footer';
+import './index.css';
 
 
 function App() {
@@ -20,7 +20,8 @@ function App() {
     const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
     const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-    const [isConfirmDeletePopupOpen, setisConfirmDeletePopupOpen] = React.useState(false);
+    const [isConfirmDeletePopupOpen, setIsConfirmDeletePopupOpen] = React.useState(false);
+    const [selectedCard, setIsSelectedCardPopupOpen] = React.useState(false);
 
     // Popup functions for opening and closing
     function handleEditAvatarClick() {
@@ -35,11 +36,16 @@ function App() {
         setIsAddPlacePopupOpen(true);
     }
 
+    function handleCardClick() {
+        setIsSelectedCardPopupOpen(true);
+    }
+
     function closeAllPopups() {
         setIsAddPlacePopupOpen(false);
         setIsEditAvatarPopupOpen(false);
         setIsEditProfilePopupOpen(false);
-        setisConfirmDeletePopupOpen(false);
+        setIsConfirmDeletePopupOpen(false);
+        setIsSelectedCardPopupOpen(false);
     }
 
     // SET PROFILE INFO USING API________________________________________________________________________
@@ -79,12 +85,12 @@ function App() {
             <AppHeader />
 
             <AppMain name={userName} description={userDescription} avatar={userAvatar} onEditAvatarClick={handleEditAvatarClick} onEditProfileClick={handleEditProfileClick}
-                onAddPlaceClick={handleAddPlaceClick} />
-            <CardList cards={cards} />
+                onAddPlaceClick={handleAddPlaceClick} cards={cards}/>
             <AppFooter />
             <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
             <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
             <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} />
+            {/* <SelectedCardPopup isOpen={selectedCard} onClose={closeAllPopups} /> */}
             <ConfirmDeletePopup isOpen={isConfirmDeletePopupOpen} onClose={closeAllPopups} />
 
 
