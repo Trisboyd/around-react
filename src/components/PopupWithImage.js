@@ -1,15 +1,20 @@
 import React from 'react';
 
-function PopupWithImage() {
+function PopupWithImage(props) {
+    if (props.card) {
     return (
-        <section className="popup popup_image">
+        <section className={`popup popup_image ${props.card ? 'popup_visible' : ''}`}>
             <div className="popup-image-container">
-                <button className="popup__exit popup__exit_image" type="button" aria-label="exit"></button>
-                <img className="popup-image-container__pic" src="<%=require('./images/clipping_picture.png')%>" alt="landscape" />
-                <p className="popup-image-container__title"></p>
+                <button className="popup__exit popup__exit_image" type="button" aria-label="exit" onClick={props.onClose}></button>
+                <img className="popup-image-container__pic" src={props.card.link} alt={props.card.name} />
+                <p className="popup-image-container__title">{props.card.name}</p>
             </div>
         </section>
     )
+}
+else {
+    return null;
+}
 }
 
 export default PopupWithImage;

@@ -7,7 +7,6 @@ import AddPlacePopup from "./components/AddPlacePopup";
 import ConfirmDeletePopup from './components/ConfirmDeletePopup';
 import PopupWithImage from './components/PopupWithImage';
 import api from "./utils/api";
-import CardList from "./components/CardList";
 import AppFooter from './components/Footer';
 import './index.css';
 
@@ -21,7 +20,7 @@ function App() {
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
     const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
     const [isConfirmDeletePopupOpen, setIsConfirmDeletePopupOpen] = React.useState(false);
-    const [selectedCard, setIsSelectedCardPopupOpen] = React.useState(false);
+    const [selectedCard, setSelectedCard] = React.useState();
 
     // Popup functions for opening and closing
     function handleEditAvatarClick() {
@@ -36,8 +35,8 @@ function App() {
         setIsAddPlacePopupOpen(true);
     }
 
-    function handleCardClick() {
-        setIsSelectedCardPopupOpen(true);
+    function handleCardClick(card) {
+        setSelectedCard(card);
     }
 
     function closeAllPopups() {
@@ -45,7 +44,7 @@ function App() {
         setIsEditAvatarPopupOpen(false);
         setIsEditProfilePopupOpen(false);
         setIsConfirmDeletePopupOpen(false);
-        setIsSelectedCardPopupOpen(false);
+        setSelectedCard();
     }
 
     // SET PROFILE INFO USING API________________________________________________________________________
@@ -85,12 +84,12 @@ function App() {
             <AppHeader />
 
             <AppMain name={userName} description={userDescription} avatar={userAvatar} onEditAvatarClick={handleEditAvatarClick} onEditProfileClick={handleEditProfileClick}
-                onAddPlaceClick={handleAddPlaceClick} cards={cards}/>
+                onAddPlaceClick={handleAddPlaceClick} onCardClick={handleCardClick} cards={cards}/>
             <AppFooter />
             <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
             <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
             <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} />
-            {/* <SelectedCardPopup isOpen={selectedCard} onClose={closeAllPopups} /> */}
+            <PopupWithImage card={selectedCard} onClose={closeAllPopups} />
             <ConfirmDeletePopup isOpen={isConfirmDeletePopupOpen} onClose={closeAllPopups} />
 
 
@@ -151,8 +150,6 @@ function App() {
                 </div>
             </section> */}
 
-            <PopupWithImage />
-
             {/* <section className="popup popup_card-delete">
                 <div className="popup__container">
                     <form className="edit-box edit-box_card-delete" name="edit-box">
@@ -190,8 +187,3 @@ export default App;
 
 
 // TEST CODE__________________
-
-{/* <Places/> */ }
-{/* {cards.map(card => {
-                return <Card id={card.id} link={card.link} name={card.name} likes={card.likes.length}></Card>
-            })} */}

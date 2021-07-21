@@ -1,7 +1,6 @@
-import { tsPropertySignature } from '@babel/types';
 import React from 'react';
 import editAvatarButton from '../images/edit-avatar-button.png';
-import CardList from './CardList';
+import Card from './Card';
 
 function AppMain(props) {
 
@@ -22,7 +21,15 @@ function AppMain(props) {
                 </div>
                 <button className="profile__add-place-button" type="button" aria-label="add-place" onClick={props.onAddPlaceClick}></button>
             </section>
-            <CardList cards={props.cards} />
+            <section className="places">
+            {
+                    props.cards.map(card => {
+                        return (
+                        <Card card={card} name={card.name} link={card.link} id={card._id} likes={card.likes.length} onCardClick={props.onCardClick}/>
+                        )}
+                    )
+                }
+        </section>
         </main>
     );
 }
