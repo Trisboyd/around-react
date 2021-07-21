@@ -9,7 +9,6 @@ function AppMain(props) {
             <section className="profile">
                 <div className="profile__image-container" onClick={props.onEditAvatarClick}>
                     <img className="profile__pic" src={props.avatar} alt="profile-image" />
-                    {/* webpack version "<%=require('./images/coronado.jpg')%>" */}
                     <img className="profile__pic-edit" src={editAvatarButton} alt="edit-avatar-button" />
                 </div>
                 <div className="profile__text">
@@ -25,7 +24,8 @@ function AppMain(props) {
             {
                     props.cards.map(card => {
                         return (
-                        <Card card={card} name={card.name} link={card.link} id={card._id} likes={card.likes.length} onCardClick={props.onCardClick}/>
+                        <Card card={card} name={card.name} link={card.link} id={card._id} likes={card.likes.length} 
+                        onCardClick={props.onCardClick} deleteClick={props.deleteClick}/>
                         )}
                     )
                 }

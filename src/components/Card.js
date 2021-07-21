@@ -8,7 +8,7 @@ const Card = (props) => {
 
     return (
         <article className="place" key={props.id}>
-            <button className="place__trash" type="button" aria-label="trash-button"></button>
+            <button className="place__trash" type="button" aria-label="trash-button" onClick={props.deleteClick}></button>
             <img className="place__image" src={props.link} alt={props.name} onClick={handleClick}/>
             <div className="place__info">
                 <h2 className="place__name">{props.name}</h2>

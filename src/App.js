@@ -35,6 +35,10 @@ function App() {
         setIsAddPlacePopupOpen(true);
     }
 
+    function handleConfirmDeleteClick() {
+        setIsConfirmDeletePopupOpen(true);
+    }
+
     function handleCardClick(card) {
         setSelectedCard(card);
     }
@@ -84,7 +88,7 @@ function App() {
             <AppHeader />
 
             <AppMain name={userName} description={userDescription} avatar={userAvatar} onEditAvatarClick={handleEditAvatarClick} onEditProfileClick={handleEditProfileClick}
-                onAddPlaceClick={handleAddPlaceClick} onCardClick={handleCardClick} cards={cards}/>
+                onAddPlaceClick={handleAddPlaceClick} onCardClick={handleCardClick} cards={cards} deleteClick={handleConfirmDeleteClick}/>
             <AppFooter />
             <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
             <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
@@ -92,12 +96,14 @@ function App() {
             <PopupWithImage card={selectedCard} onClose={closeAllPopups} />
             <ConfirmDeletePopup isOpen={isConfirmDeletePopupOpen} onClose={closeAllPopups} />
 
+        </body>
+    );
+}
+
+export default App;
 
 
-
-
-
-            // the confirmDeletePopup onClick will be attach to the CARD itself which I still need to do
+// TEMPLATE CODE__________________
 
             {/* <template id="place-template">
                 <article className="place">
@@ -179,11 +185,3 @@ function App() {
             {/* This script is necessary to avoid a "regenerator-runtime" error. No other solutions to
     this problem were found despite the efforts of multiple people including a senior software developer */}
             {/* <script src="https://unpkg.com/regenerator-runtime@0.13.1/runtime.js"></script> */}
-        </body>
-    );
-}
-
-export default App;
-
-
-// TEST CODE__________________
