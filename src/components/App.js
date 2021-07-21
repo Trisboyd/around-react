@@ -7,7 +7,7 @@ import AddPlacePopup from "./AddPlacePopup";
 import ConfirmDeletePopup from './ConfirmDeletePopup';
 import PopupWithImage from './PopupWithImage';
 import api from "../utils/api";
-import Card from "./Card";
+import CardList from "./CardList";
 import AppFooter from './Footer';
 import '../index.css';
 
@@ -80,7 +80,7 @@ function App() {
 
             <AppMain name={userName} description={userDescription} avatar={userAvatar} onEditAvatarClick={handleEditAvatarClick} onEditProfileClick={handleEditProfileClick}
                 onAddPlaceClick={handleAddPlaceClick} />
-            <Card cards={cards} />
+            <CardList cards={cards} />
             <AppFooter />
             <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
             <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
