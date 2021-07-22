@@ -5,7 +5,7 @@ import EditProfilePopup from "./components/EditProfilePopup";
 import EditAvatarPopup from "./components/EditAvatarPopup";
 import AddPlacePopup from "./components/AddPlacePopup";
 import ConfirmDeletePopup from './components/ConfirmDeletePopup';
-import PopupWithImage from './components/PopupWithImage';
+import ImagePopup from './components/ImagePopup';
 import api from "./utils/api";
 import AppFooter from './components/Footer';
 import './index.css';
@@ -94,7 +94,7 @@ function App() {
             <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
             <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
             <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} />
-            <PopupWithImage card={selectedCard} onClose={closeAllPopups} />
+            <ImagePopup card={selectedCard} onClose={closeAllPopups} />
             <ConfirmDeletePopup isOpen={isConfirmDeletePopupOpen} onClose={closeAllPopups} />
 
         </body>
