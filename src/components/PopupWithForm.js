@@ -1,9 +1,5 @@
 import React from 'react';
 
-// popup_edit-profile
-// popup_add-place
-// popup_edit-avatar
-
 function PopupWithForm(props) {
     return (
         <section className={`popup popup_${props.name} ${props.isOpen ? 'popup_visible' : ''}`}>
