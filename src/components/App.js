@@ -53,7 +53,7 @@ function App() {
     // Components
     return (
 
-        <div className="page">
+        <div>
             <Header />
             <Main onEditAvatarClick={handleEditAvatarClick} onEditProfileClick={handleEditProfileClick}
                 onAddPlaceClick={handleAddPlaceClick} onCardClick={handleCardClick} deleteClick={handleConfirmDeleteClick} />
