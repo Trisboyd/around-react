@@ -1,13 +1,13 @@
 import React from 'react';
-import AppHeader from './components/Header';
-import AppMain from './components/Main';
+import Header from './components/Header';
+import Main from './components/Main';
 import EditProfilePopup from "./components/EditProfilePopup";
 import EditAvatarPopup from "./components/EditAvatarPopup";
 import AddPlacePopup from "./components/AddPlacePopup";
 import ConfirmDeletePopup from './components/ConfirmDeletePopup';
 import ImagePopup from './components/ImagePopup';
 import api from "./utils/api";
-import AppFooter from './components/Footer';
+import Footer from './components/Footer';
 import './index.css';
 
 
@@ -86,11 +86,11 @@ function App() {
     // Components
     return (
         <body className="page">
-            <AppHeader />
+            <Header />
 
-            <AppMain name={userName} description={userDescription} avatar={userAvatar} onEditAvatarClick={handleEditAvatarClick} onEditProfileClick={handleEditProfileClick}
+            <Main name={userName} description={userDescription} avatar={userAvatar} onEditAvatarClick={handleEditAvatarClick} onEditProfileClick={handleEditProfileClick}
                 onAddPlaceClick={handleAddPlaceClick} onCardClick={handleCardClick} cards={cards} deleteClick={handleConfirmDeleteClick}/>
-            <AppFooter />
+            <Footer />
             <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
             <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
             <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} />

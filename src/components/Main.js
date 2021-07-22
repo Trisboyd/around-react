@@ -2,7 +2,7 @@ import React from 'react';
 import editAvatarButton from '../images/edit-avatar-button.png';
 import Card from './Card';
 
-function AppMain(props) {
+function Main(props) {
 
     return (
         <main>
@@ -34,4 +34,4 @@ function AppMain(props) {
     );
 }
 
-export default AppMain;
+export default Main;

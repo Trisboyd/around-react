@@ -1,6 +1,6 @@
 import React from 'react';
 
-function PopupWithImage(props) {
+function ImagePopup(props) {
     if (props.card) {
     return (
         <section className={`popup popup_image ${props.card ? 'popup_visible' : ''}`}>
@@ -17,4 +17,4 @@ else {
 }
 }
 
-export default PopupWithImage;
+export default ImagePopup;

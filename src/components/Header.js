@@ -1,7 +1,7 @@
 import React from 'react';
 import aroundtheus from "../images/aroundtheus.svg";
 
-function AppHeader() {
+function Header() {
     return (
         <header className="header">
             <img className="header__img" src={aroundtheus} alt="Around the U.S." />
@@ -9,4 +9,4 @@ function AppHeader() {
     )
 }
 
-export default AppHeader
+export default Header
