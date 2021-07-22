@@ -1,14 +1,14 @@
 import React from 'react';
-import Header from './components/Header';
-import Main from './components/Main';
-import EditProfilePopup from "./components/EditProfilePopup";
-import EditAvatarPopup from "./components/EditAvatarPopup";
-import AddPlacePopup from "./components/AddPlacePopup";
-import ConfirmDeletePopup from './components/ConfirmDeletePopup';
-import ImagePopup from './components/ImagePopup';
-import api from "./utils/api";
-import Footer from './components/Footer';
-import './index.css';
+import Header from './Header';
+import Main from './Main';
+import EditProfilePopup from "./EditProfilePopup";
+import EditAvatarPopup from "./EditAvatarPopup";
+import AddPlacePopup from "./AddPlacePopup";
+import ConfirmDeletePopup from './ConfirmDeletePopup';
+import ImagePopup from './ImagePopup';
+import api from "../utils/api";
+import Footer from './Footer';
+import '../index.css';
 
 
 function App() {
@@ -85,11 +85,11 @@ function App() {
 
     // Components
     return (
-        <body className="page">
-            <Header />
 
+        <div className="page">
+            <Header />
             <Main name={userName} description={userDescription} avatar={userAvatar} onEditAvatarClick={handleEditAvatarClick} onEditProfileClick={handleEditProfileClick}
-                onAddPlaceClick={handleAddPlaceClick} onCardClick={handleCardClick} cards={cards} deleteClick={handleConfirmDeleteClick}/>
+                onAddPlaceClick={handleAddPlaceClick} onCardClick={handleCardClick} cards={cards} deleteClick={handleConfirmDeleteClick} />
             <Footer />
             <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
             <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
@@ -97,7 +97,7 @@ function App() {
             <ImagePopup card={selectedCard} onClose={closeAllPopups} />
             <ConfirmDeletePopup isOpen={isConfirmDeletePopupOpen} onClose={closeAllPopups} />
 
-        </body>
+        </div>
     );
 }
 

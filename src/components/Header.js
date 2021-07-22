@@ -1,10 +1,10 @@
 import React from 'react';
-import aroundtheus from "../images/aroundtheus.svg";
+import aroundTheUs from "../images/aroundtheus.svg";
 
 function Header() {
     return (
         <header className="header">
-            <img className="header__img" src={aroundtheus} alt="Around the U.S." />
+            <img className="header__img" src={aroundTheUs} alt="Around the U.S." />
         </header>
     )
 }
