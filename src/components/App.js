@@ -18,38 +18,30 @@ function App() {
     const [currentUser, setCurrentUser] = React.useState({
         name: '',
         about: '',
-        avatar: ''
+        avatar: '',
+        cards: ''
     });
 
-    // const retrieveUserInfo = 
-    // Promise.all([api.getProfile(), api.getCardList()])
-    // .then(res => {
-    //     const [userData, cardData] = res;
-
-    //     newUser.setUserInfo({
-    //         name: userData.name,
-    //         descriptor: userData.about,
-    //         avatar: userData.avatar,
-    //         userId: userData._id
-    //     });
-
-    //     cardList.renderItems(cardData);
-    // })
-    // .catch(err => {console.log(err)})
-
-    function setUserInfo() {
-        api.getProfile().then(res => {
-            setCurrentUser(
-                {name: res.name,
-                about: res.about,
-                avatar: res.avatar
-                })
+    const retrieveUserInfo = () => {
+    Promise.all([api.getProfile(), api.getCardList()])
+    .then(res => {
+        const [userData, cardData] = res;
+        setUserInfo(userData, cardData);
         })
-            .catch(err => { console.log(err) })
+    .catch(err => {console.log(err)})
+    }
+
+    const setUserInfo= (data, cards) => {
+            setCurrentUser(
+                {name: data.name,
+                about: data.about,
+                avatar: data.avatar,
+                cards: cards
+                })
     }
 
     React.useEffect(() => {
-        setUserInfo();
+        retrieveUserInfo();
     }, []);
 
 
