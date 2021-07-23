@@ -7,10 +7,51 @@ import AddPlacePopup from "./AddPlacePopup";
 import ConfirmDeletePopup from './ConfirmDeletePopup';
 import ImagePopup from './ImagePopup';
 import Footer from './Footer';
+import api from '../utils/api';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import '../index.css';
 
 
 function App() {
+
+    // Retrieve User info in object______________________________________________________________________________________
+    const [currentUser, setCurrentUser] = React.useState({
+        name: '',
+        about: '',
+        avatar: ''
+    });
+
+    // const retrieveUserInfo = 
+    // Promise.all([api.getProfile(), api.getCardList()])
+    // .then(res => {
+    //     const [userData, cardData] = res;
+
+    //     newUser.setUserInfo({
+    //         name: userData.name,
+    //         descriptor: userData.about,
+    //         avatar: userData.avatar,
+    //         userId: userData._id
+    //     });
+
+    //     cardList.renderItems(cardData);
+    // })
+    // .catch(err => {console.log(err)})
+
+    function setUserInfo() {
+        api.getProfile().then(res => {
+            setCurrentUser(
+                {name: res.name,
+                about: res.about,
+                avatar: res.avatar
+                })
+        })
+            .catch(err => { console.log(err) })
+    }
+
+    React.useEffect(() => {
+        setUserInfo();
+    }, []);
+
 
     // Hooks for Popups
     const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
@@ -54,6 +95,7 @@ function App() {
     return (
 
         <div>
+            <CurrentUserContext.Provider value={currentUser}>
             <Header />
             <Main onEditAvatarClick={handleEditAvatarClick} onEditProfileClick={handleEditProfileClick}
                 onAddPlaceClick={handleAddPlaceClick} onCardClick={handleCardClick} deleteClick={handleConfirmDeleteClick} />
@@ -63,7 +105,7 @@ function App() {
             <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} />
             <ImagePopup card={selectedCard} onClose={closeAllPopups} />
             <ConfirmDeletePopup isOpen={isConfirmDeletePopupOpen} onClose={closeAllPopups} />
-
+            </CurrentUserContext.Provider>
         </div>
     );
 }
