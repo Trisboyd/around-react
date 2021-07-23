@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/around-react/static/css/main.3c41104c.chunk.css",
+    "main.js": "/around-react/static/js/main.215d5ca3.chunk.js",
+    "main.js.map": "/around-react/static/js/main.215d5ca3.chunk.js.map",
+    "runtime-main.js": "/around-react/static/js/runtime-main.429d6051.js",
+    "runtime-main.js.map": "/around-react/static/js/runtime-main.429d6051.js.map",
+    "static/js/2.eb3623c1.chunk.js": "/around-react/static/js/2.eb3623c1.chunk.js",
+    "static/js/2.eb3623c1.chunk.js.map": "/around-react/static/js/2.eb3623c1.chunk.js.map",
+    "static/js/3.f1e91b72.chunk.js": "/around-react/static/js/3.f1e91b72.chunk.js",
+    "static/js/3.f1e91b72.chunk.js.map": "/around-react/static/js/3.f1e91b72.chunk.js.map",
+    "index.html": "/around-react/index.html",
+    "static/css/main.3c41104c.chunk.css.map": "/around-react/static/css/main.3c41104c.chunk.css.map",
+    "static/js/2.eb3623c1.chunk.js.LICENSE.txt": "/around-react/static/js/2.eb3623c1.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/around-react/static/media/heart.99043841.svg",
+    "static/media/aroundtheus.c7581985.svg": "/around-react/static/media/aroundtheus.c7581985.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.429d6051.js",
+    "static/js/2.eb3623c1.chunk.js",
+    "static/css/main.3c41104c.chunk.css",
+    "static/js/main.215d5ca3.chunk.js"
+  ]
+}
