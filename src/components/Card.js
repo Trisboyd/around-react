@@ -2,6 +2,7 @@ import React from 'react';
 
 const Card = (props) => {
 
+    // click on the card to open the ImagePopup
     function handleClick() {
         props.onCardClick(props.card);
     }
@@ -14,6 +15,14 @@ const Card = (props) => {
         `place__trash ${isOwn ? 'place__trash_visible' : 'place__trash_hidden'}`
     );
 
+    // check if the user has liked a card
+    const isLiked = props.card.likes.some(i => i._id === props.currentUser);
+
+    // create a variable to set classname for like button
+    const placeButtonClassName = (
+        `place__button ${isLiked ? 'place__button_type_filled' : 'place__button_type_unfilled'}`
+    );
+
     return (
         <article className="place">
             <button className={placeTrashClassName} type="button" aria-label="trash-button" onClick={props.deleteClick}></button>
@@ -21,7 +30,7 @@ const Card = (props) => {
             <div className="place__info">
                 <h2 className="place__name">{props.name}</h2>
                 <div className="place__info_like-column">
-                    <button className="place__button place__button_type_unfilled" type="button"
+                    <button className={placeButtonClassName} type="button"
                         aria-label="like-button"></button>
                     <p className="place__like-count">{props.likes}</p>
                 </div>
