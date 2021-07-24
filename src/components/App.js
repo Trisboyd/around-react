@@ -19,6 +19,7 @@ function App() {
         name: '',
         about: '',
         avatar: '',
+        id: '',
         cards: ''
     });
 
@@ -36,6 +37,7 @@ function App() {
                 {name: data.name,
                 about: data.about,
                 avatar: data.avatar,
+                id: data._id,
                 cards: cards
                 })
     }
