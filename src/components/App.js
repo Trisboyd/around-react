@@ -19,26 +19,31 @@ function App() {
         name: '',
         about: '',
         avatar: '',
-        id: '',
-        cards: ''
+        id: ''
     });
 
     const retrieveUserInfo = () => {
-    Promise.all([api.getProfile(), api.getCardList()])
-    .then(res => {
-        const [userData, cardData] = res;
-        setUserInfo(userData, cardData);
+        api.getProfile().then(res => {
+            setUserInfo(res);
         })
-    .catch(err => {console.log(err)})
+        .catch(err => {console.log(err)})
     }
 
-    const setUserInfo= (data, cards) => {
+    // const retrieveUserInfo = () => {
+    // Promise.all([api.getProfile(), api.getCardList()])
+    // .then(res => {
+    //     const [userData, cardData] = res;
+    //     setUserInfo(userData, cardData);
+    //     })
+    // .catch(err => {console.log(err)})
+    // }
+
+    const setUserInfo= (data) => {
             setCurrentUser(
                 {name: data.name,
                 about: data.about,
                 avatar: data.avatar,
                 id: data._id,
-                cards: cards
                 })
     }
 

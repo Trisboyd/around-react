@@ -1,11 +1,38 @@
 import React from 'react';
 import editAvatarButton from '../images/edit-avatar-button.png';
 import Card from './Card';
-import {CurrentUserContext} from '../contexts/CurrentUserContext';
+import api from '../utils/api';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function Main(props) {
 
+    const [cards, setCards] = React.useState([]);
+
+    // function that fetches cards
+    function addCards() {
+        api.getCardList().then(res => {
+            setCards([...cards, ...res]);
+        })
+            .catch(err => { console.log(err) })
+    }
+
+    // call cards and profile using hook's "useEffect"
+    React.useEffect(() => {
+        addCards();
+    }, []);
+
+
     const userInfo = React.useContext(CurrentUserContext);
+
+    function handleCardLike(card) {
+
+        const isLiked = card.likes.some(cardLike => cardLike._id === userInfo.id);
+
+        api.changeLikeCardStatus(card._id, isLiked).then((likedCard) => {
+            setCards(cards.map((cardItem) => cardItem._id === card._id ? likedCard : cardItem));
+        })
+            .catch(err => { console.log(err) });
+    }
 
     return (
         <main>
@@ -24,17 +51,17 @@ function Main(props) {
                 <button className="profile__add-place-button" type="button" aria-label="add-place" onClick={props.onAddPlaceClick}></button>
             </section>
             <section className="places">
-            {
-                userInfo.cards &&
-                    userInfo.cards.map(card => {
+                {
+                    cards.map(card => {
                         return (
-                        <Card key={card._id} card={card} name={card.name} link={card.link} id={card._id} likes={card.likes.length} 
-                        onCardClick={props.onCardClick} deleteClick={props.deleteClick}
-                        cardOwner={card.owner._id} currentUser={userInfo.id}/>
-                        )}
+                            <Card key={card._id} card={card} name={card.name} link={card.link} id={card._id}
+                                likes={card.likes.length} onCardClick={props.onCardClick} deleteClick={props.deleteClick}
+                                cardOwner={card.owner._id} currentUser={userInfo.id} onCardLike={handleCardLike} />
+                        )
+                    }
                     )
                 }
-        </section>
+            </section>
         </main>
     );
 }

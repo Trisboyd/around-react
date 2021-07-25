@@ -29,21 +29,30 @@ class Api {
             });
     }
 
-    // change avatar 
-    changeAvatar(link) {
-        return fetch(`${this._url}/users/me/avatar`, {
-            method: "PATCH",
-            headers: {
-                authorization: this._authToken,
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                avatar: link
+    // change likes
+    changeLikeCardStatus(cardId, likeStatus) {
+        if (likeStatus) {
+        return fetch(`${this._url}/cards/likes/${cardId}`, {
+                method: "DELETE",
+                headers: {
+                    authorization: this._auth
+                }
             })
-        })
             .then((res) => {
                 return this._checkResponse(res)
             });
+        }
+        else {
+            return fetch(`${this._url}/cards/likes/${cardId}`, {
+                method: "PUT",
+                headers: {
+                    authorization: this._auth
+                }
+            })
+            .then((res) => {
+                return this._checkResponse(res)
+            });
+        }
     }
 
     // Check if response is valid

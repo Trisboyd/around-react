@@ -1,10 +1,15 @@
 import React from 'react';
 
+
 const Card = (props) => {
 
     // click on the card to open the ImagePopup
     function handleClick() {
         props.onCardClick(props.card);
+    }
+
+    function handleLikeClick() {
+        props.onCardLike(props.card);
     }
 
     // Checking if the current user is the owner of the current card
@@ -30,7 +35,7 @@ const Card = (props) => {
             <div className="place__info">
                 <h2 className="place__name">{props.name}</h2>
                 <div className="place__info_like-column">
-                    <button className={placeButtonClassName} type="button"
+                    <button className={placeButtonClassName} type="button" onClick={handleLikeClick}
                         aria-label="like-button"></button>
                     <p className="place__like-count">{props.likes}</p>
                 </div>
