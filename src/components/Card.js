@@ -8,8 +8,15 @@ const Card = (props) => {
         props.onCardClick(props.card);
     }
 
+    // click on heart to add or subtract like
     function handleLikeClick() {
         props.onCardLike(props.card);
+    }
+
+    // delete a card
+    function handleDeleteClick() {
+        // props.deleteClick; this is for opening the delete Click popup
+        props.onCardDelete(props.card);
     }
 
     // Checking if the current user is the owner of the current card
@@ -30,7 +37,7 @@ const Card = (props) => {
 
     return (
         <article className="place">
-            <button className={placeTrashClassName} type="button" aria-label="trash-button" onClick={props.deleteClick}></button>
+            <button className={placeTrashClassName} type="button" aria-label="trash-button" onClick={handleDeleteClick}></button>
             <img className="place__image" src={props.link} alt={props.name} onClick={handleClick} />
             <div className="place__info">
                 <h2 className="place__name">{props.name}</h2>

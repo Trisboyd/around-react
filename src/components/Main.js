@@ -6,6 +6,10 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function Main(props) {
 
+    // User info imported by context
+    const userInfo = React.useContext(CurrentUserContext);
+
+    // Cards state variable
     const [cards, setCards] = React.useState([]);
 
     // function that fetches cards
@@ -21,9 +25,7 @@ function Main(props) {
         addCards();
     }, []);
 
-
-    const userInfo = React.useContext(CurrentUserContext);
-
+    // function for sending card likes or unlikes to API and resetting the status accordingly
     function handleCardLike(card) {
 
         const isLiked = card.likes.some(cardLike => cardLike._id === userInfo.id);
@@ -32,6 +34,15 @@ function Main(props) {
             setCards(cards.map((cardItem) => cardItem._id === card._id ? likedCard : cardItem));
         })
             .catch(err => { console.log(err) });
+    }
+
+
+    // function for deleting a card
+    function handleCardDelete(card) {
+
+        api.deleteCard(card._id).then(res => {
+            setCards(cards.filter((cardItem) => cardItem._id !== card._id))
+        }) 
     }
 
     return (
@@ -56,7 +67,8 @@ function Main(props) {
                         return (
                             <Card key={card._id} card={card} name={card.name} link={card.link} id={card._id}
                                 likes={card.likes.length} onCardClick={props.onCardClick} deleteClick={props.deleteClick}
-                                cardOwner={card.owner._id} currentUser={userInfo.id} onCardLike={handleCardLike} />
+                                cardOwner={card.owner._id} currentUser={userInfo.id} onCardLike={handleCardLike} 
+                                onCardDelete={handleCardDelete}/>
                         )
                     }
                     )

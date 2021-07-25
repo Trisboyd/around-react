@@ -32,15 +32,15 @@ class Api {
     // change likes
     changeLikeCardStatus(cardId, likeStatus) {
         if (likeStatus) {
-        return fetch(`${this._url}/cards/likes/${cardId}`, {
+            return fetch(`${this._url}/cards/likes/${cardId}`, {
                 method: "DELETE",
                 headers: {
                     authorization: this._auth
                 }
             })
-            .then((res) => {
-                return this._checkResponse(res)
-            });
+                .then((res) => {
+                    return this._checkResponse(res)
+                });
         }
         else {
             return fetch(`${this._url}/cards/likes/${cardId}`, {
@@ -49,10 +49,23 @@ class Api {
                     authorization: this._auth
                 }
             })
+                .then((res) => {
+                    return this._checkResponse(res)
+                });
+        }
+    }
+
+    // delete card from server
+    deleteCard(cardId) {
+        return fetch(`${this._url}/cards/${cardId}`, {
+            method: "DELETE",
+            headers: {
+                authorization: this._auth
+            }
+        })
             .then((res) => {
                 return this._checkResponse(res)
             });
-        }
     }
 
     // Check if response is valid
