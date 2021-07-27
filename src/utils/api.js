@@ -86,6 +86,25 @@ class Api {
             });
     }
 
+    // add card to server
+    addCard({data}) {
+        return fetch(`${this._url}/cards`, {
+            method: "POST",
+            headers: {
+                authorization: this._auth,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name: data.name,
+                link: data.link
+            })
+        })
+        .then((res) => {
+            return this._checkResponse(res)
+        });
+    }
+
+
     // Check if response is valid
     _checkResponse(res) {
         if (res.ok) {

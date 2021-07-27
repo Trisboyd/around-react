@@ -43,7 +43,7 @@ function App() {
     }, []);
 
 
-    // Hooks for Popups
+    // State Variables for Popups
     const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
     const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
@@ -80,6 +80,7 @@ function App() {
         setSelectedCard();
     }
 
+    // function for changing user info in the API based on inputs
     function handleUpdateUser(data) {
         api.changeProfile(data).then(res => {
             setUserInfo(data);
@@ -87,6 +88,49 @@ function App() {
         })
         .catch(err => {console.log(err)})
     }
+
+// CARDS____________________________________________________________________________________________________________
+
+    // Cards state variable
+    const [cards, setCards] = React.useState([]);
+
+    // function that fetches cards
+    function addCards() {
+        api.getCardList().then(res => {
+            setCards([...cards, ...res]);
+        })
+            .catch(err => { console.log(err) })
+    }
+
+    // call cards and profile using hook's "useEffect"
+    React.useEffect(() => {
+        addCards();
+    }, []);
+
+    // function for sending card likes or unlikes to API and resetting the status accordingly
+    function handleCardLike(card) {
+
+        const isLiked = card.likes.some(cardLike => cardLike._id === currentUser.id);
+
+        api.changeLikeCardStatus(card._id, isLiked).then((likedCard) => {
+            setCards(cards.map((cardItem) => cardItem._id === card._id ? likedCard : cardItem));
+        })
+            .catch(err => { console.log(err) });
+    }
+
+
+    // function for deleting a card
+    function handleCardDelete(card) {
+
+        api.deleteCard(card._id).then(res => {
+            setCards(cards.filter((cardItem) => cardItem._id !== card._id))
+        }) 
+    }
+
+
+
+
+
 
 
     // Components
@@ -96,7 +140,8 @@ function App() {
             <CurrentUserContext.Provider value={currentUser}>
             <Header />
             <Main onEditAvatarClick={handleEditAvatarClick} onEditProfileClick={handleEditProfileClick}
-                onAddPlaceClick={handleAddPlaceClick} onCardClick={handleCardClick} deleteClick={handleConfirmDeleteClick} />
+                onAddPlaceClick={handleAddPlaceClick} onCardClick={handleCardClick} deleteClick={handleConfirmDeleteClick} 
+                cards={cards} handleCardLike={handleCardLike} handleCardDelete={handleCardDelete}/>
             <Footer />
             <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
             <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
