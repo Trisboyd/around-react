@@ -68,6 +68,24 @@ class Api {
             });
     }
 
+    // update profile info on server based on user changes
+    changeProfile(data) {
+        return fetch(`${this._url}/users/me`, {
+            method: "PATCH",
+            headers: {
+                authorization: this._auth,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name: data.name,
+                about: data.about
+            })
+        })
+            .then((res) => {
+                return this._checkResponse(res)
+            });
+    }
+
     // Check if response is valid
     _checkResponse(res) {
         if (res.ok) {

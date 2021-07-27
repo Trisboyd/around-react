@@ -29,15 +29,6 @@ function App() {
         .catch(err => {console.log(err)})
     }
 
-    // const retrieveUserInfo = () => {
-    // Promise.all([api.getProfile(), api.getCardList()])
-    // .then(res => {
-    //     const [userData, cardData] = res;
-    //     setUserInfo(userData, cardData);
-    //     })
-    // .catch(err => {console.log(err)})
-    // }
-
     const setUserInfo= (data) => {
             setCurrentUser(
                 {name: data.name,
@@ -89,6 +80,14 @@ function App() {
         setSelectedCard();
     }
 
+    function handleUpdateUser(data) {
+        api.changeProfile(data).then(res => {
+            setUserInfo(data);
+            closeAllPopups();
+        })
+        .catch(err => {console.log(err)})
+    }
+
 
     // Components
     return (
@@ -99,7 +98,7 @@ function App() {
             <Main onEditAvatarClick={handleEditAvatarClick} onEditProfileClick={handleEditProfileClick}
                 onAddPlaceClick={handleAddPlaceClick} onCardClick={handleCardClick} deleteClick={handleConfirmDeleteClick} />
             <Footer />
-            <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
+            <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
             <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
             <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} />
             <ImagePopup card={selectedCard} onClose={closeAllPopups} />
