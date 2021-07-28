@@ -97,7 +97,6 @@ function App() {
         .catch(err => {console.log(err)})
     }
 
-<<<<<<< HEAD
 // CARDS____________________________________________________________________________________________________________
 
     // Cards state variable
@@ -142,7 +141,6 @@ function App() {
         })
         .catch(err => { console.log(err) });
     }
-=======
     function handleUpdateAvatar(data) {
         api.changeAvatar(data).then(res => {
             setAvatar(data);
@@ -151,7 +149,6 @@ function App() {
         .catch(err => {console.log(err)})
     }
 
->>>>>>> feature/profile-editing
 
     // Components
     return (
@@ -164,13 +161,9 @@ function App() {
                 cards={cards} handleCardLike={handleCardLike} handleCardDelete={handleCardDelete}/>
             <Footer />
             <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
-<<<<<<< HEAD
             <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
             <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddCard={addCardHandler}/>
-=======
             <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
-            <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} />
->>>>>>> feature/profile-editing
             <ImagePopup card={selectedCard} onClose={closeAllPopups} />
             <ConfirmDeletePopup isOpen={isConfirmDeletePopupOpen} onClose={closeAllPopups} />
             </CurrentUserContext.Provider>
