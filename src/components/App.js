@@ -57,6 +57,7 @@ function App() {
     const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
     const [isConfirmDeletePopupOpen, setIsConfirmDeletePopupOpen] = React.useState(false);
     const [selectedCard, setSelectedCard] = React.useState();
+    const [cardForDelete, setCardForDelete] = React.useState();
 
 
     // Popup functions for opening and closing
@@ -72,8 +73,9 @@ function App() {
         setIsAddPlacePopupOpen(true);
     }
 
-    function handleConfirmDeleteClick() {
+    function handleConfirmDeleteClick(card) {
         setIsConfirmDeletePopupOpen(true);
+        setCardForDelete(card);
     }
 
     function handleCardClick(card) {
@@ -135,8 +137,14 @@ function App() {
 
     // function for deleting a card
     function handleCardDelete(card) {
-        api.deleteCard(card._id).then(res => {
-            setCards(cards.filter((cardItem) => cardItem._id !== card._id))
+        handleConfirmDeleteClick(card);
+    }
+
+    function confirmDeleteClick() {
+        api.deleteCard(cardForDelete._id).then(res => {
+            setCards(cards.filter((cardItem) => cardItem._id !== cardForDelete._id))
+            setCardForDelete();
+            closeAllPopups();
         }) 
         .catch(err => { console.log(err) });
     }
@@ -165,15 +173,15 @@ function App() {
             <CurrentUserContext.Provider value={currentUser}>
             <Header />
             <Main onEditAvatarClick={handleEditAvatarClick} onEditProfileClick={handleEditProfileClick}
-                onAddPlaceClick={handleAddPlaceClick} onCardClick={handleCardClick} deleteClick={handleConfirmDeleteClick} 
-                cards={cards} handleCardLike={handleCardLike} handleCardDelete={handleCardDelete}/>
+                onAddPlaceClick={handleAddPlaceClick} onCardClick={handleCardClick} cards={cards} 
+                handleCardLike={handleCardLike} handleCardDelete={handleCardDelete}/>
             <Footer />
             <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
             <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
             <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddCard={addCardHandler}/>
             <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
             <ImagePopup card={selectedCard} onClose={closeAllPopups} />
-            <ConfirmDeletePopup isOpen={isConfirmDeletePopupOpen} onClose={closeAllPopups} />
+            <ConfirmDeletePopup isOpen={isConfirmDeletePopupOpen} onClose={closeAllPopups} cardDelete={confirmDeleteClick}/>
             </CurrentUserContext.Provider>
         </div>
     );

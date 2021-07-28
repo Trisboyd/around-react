@@ -15,7 +15,6 @@ const Card = (props) => {
 
     // delete a card
     function handleDeleteClick() {
-        // props.deleteClick; this is for opening the delete Click popup
         props.onCardDelete(props.card);
     }
 
