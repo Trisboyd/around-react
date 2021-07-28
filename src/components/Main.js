@@ -1,7 +1,6 @@
 import React from 'react';
 import editAvatarButton from '../images/edit-avatar-button.png';
 import Card from './Card';
-import api from '../utils/api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function Main(props) {
