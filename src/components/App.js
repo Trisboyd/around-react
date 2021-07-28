@@ -97,6 +97,14 @@ function App() {
         .catch(err => {console.log(err)})
     }
 
+    function handleUpdateAvatar(data) {
+        api.changeAvatar(data).then(res => {
+            setAvatar(data);
+            closeAllPopups();
+        })
+        .catch(err => {console.log(err)})
+    }
+
 // CARDS____________________________________________________________________________________________________________
 
     // Cards state variable
