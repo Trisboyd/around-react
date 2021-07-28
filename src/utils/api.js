@@ -90,9 +90,6 @@ class Api {
     addCard(data) {
         return fetch(`${this._url}/cards`, {
             method: "POST",
-    changeAvatar(link) {
-        return fetch(`${this._url}/users/me/avatar`, {
-            method: "PATCH",
             headers: {
                 authorization: this._auth,
                 "Content-Type": "application/json"
