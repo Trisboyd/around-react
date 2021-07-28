@@ -109,9 +109,7 @@ function App() {
 
     // function for sending card likes or unlikes to API and resetting the status accordingly
     function handleCardLike(card) {
-
         const isLiked = card.likes.some(cardLike => cardLike._id === currentUser.id);
-
         api.changeLikeCardStatus(card._id, isLiked).then((likedCard) => {
             setCards(cards.map((cardItem) => cardItem._id === card._id ? likedCard : cardItem));
         })
@@ -121,17 +119,20 @@ function App() {
 
     // function for deleting a card
     function handleCardDelete(card) {
-
         api.deleteCard(card._id).then(res => {
             setCards(cards.filter((cardItem) => cardItem._id !== card._id))
         }) 
+        .catch(err => { console.log(err) });
     }
 
-
-
-
-
-
+    // function for adding a card
+    function addCardHandler(cardData) {
+        api.addCard(cardData).then(res => {
+            setCards([...cards, res])
+            closeAllPopups();
+        })
+        .catch(err => { console.log(err) });
+    }
 
     // Components
     return (
@@ -145,7 +146,7 @@ function App() {
             <Footer />
             <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
             <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
-            <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} />
+            <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddCard={addCardHandler}/>
             <ImagePopup card={selectedCard} onClose={closeAllPopups} />
             <ConfirmDeletePopup isOpen={isConfirmDeletePopupOpen} onClose={closeAllPopups} />
             </CurrentUserContext.Provider>

@@ -87,7 +87,7 @@ class Api {
     }
 
     // add card to server
-    addCard({data}) {
+    addCard(data) {
         return fetch(`${this._url}/cards`, {
             method: "POST",
             headers: {
