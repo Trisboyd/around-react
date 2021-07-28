@@ -104,6 +104,22 @@ class Api {
         });
     }
 
+    changeAvatar(link) {
+        return fetch(`${this._url}/users/me/avatar`, {
+            method: "PATCH",
+            headers: {
+                authorization: this._auth,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                avatar: link
+            })
+        })
+        .then((res) => {
+            return this._checkResponse(res)
+        });
+    }
+
     // Check if response is valid
     _checkResponse(res) {
         if (res.ok) {
