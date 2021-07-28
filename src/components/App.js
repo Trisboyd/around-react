@@ -25,17 +25,25 @@ function App() {
     const retrieveUserInfo = () => {
         api.getProfile().then(res => {
             setUserInfo(res);
+            setAvatar(res.avatar);
         })
         .catch(err => {console.log(err)})
     }
 
+    const setAvatar = (link) => {
+        setCurrentUser((prevCurrentUser) => ({
+            ...prevCurrentUser,
+            avatar: link
+        }));
+    }
+
     const setUserInfo= (data) => {
-            setCurrentUser(
-                {name: data.name,
-                about: data.about,
-                avatar: data.avatar,
-                id: data._id,
-                })
+        setCurrentUser((prevCurrentUser) => ({
+            ...prevCurrentUser,
+            name: data.name,
+            about: data.about,
+            id: data._id,
+        }));
     }
 
     React.useEffect(() => {
@@ -88,6 +96,14 @@ function App() {
         .catch(err => {console.log(err)})
     }
 
+    function handleUpdateAvatar(data) {
+        api.changeAvatar(data).then(res => {
+            setAvatar(data);
+            closeAllPopups();
+        })
+        .catch(err => {console.log(err)})
+    }
+
 
     // Components
     return (
@@ -99,7 +115,7 @@ function App() {
                 onAddPlaceClick={handleAddPlaceClick} onCardClick={handleCardClick} deleteClick={handleConfirmDeleteClick} />
             <Footer />
             <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
-            <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
+            <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
             <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} />
             <ImagePopup card={selectedCard} onClose={closeAllPopups} />
             <ConfirmDeletePopup isOpen={isConfirmDeletePopupOpen} onClose={closeAllPopups} />
