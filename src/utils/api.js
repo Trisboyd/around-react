@@ -86,27 +86,20 @@ class Api {
             });
     }
 
-<<<<<<< HEAD
     // add card to server
     addCard(data) {
         return fetch(`${this._url}/cards`, {
             method: "POST",
-=======
     changeAvatar(link) {
         return fetch(`${this._url}/users/me/avatar`, {
             method: "PATCH",
->>>>>>> feature/profile-editing
             headers: {
                 authorization: this._auth,
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-<<<<<<< HEAD
                 name: data.name,
                 link: data.link
-=======
-                avatar: link
->>>>>>> feature/profile-editing
             })
         })
         .then((res) => {
@@ -114,10 +107,6 @@ class Api {
         });
     }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> feature/profile-editing
     // Check if response is valid
     _checkResponse(res) {
         if (res.ok) {
