@@ -1,7 +1,11 @@
 import React from 'react';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 
 const Card = (props) => {
+
+    // User info imported by context
+    const currentUser = React.useContext(CurrentUserContext);
 
     // click on the card to open the ImagePopup
     function handleClick() {
@@ -19,7 +23,7 @@ const Card = (props) => {
     }
 
     // Checking if the current user is the owner of the current card
-    const isOwn = props.cardOwner === props.currentUser;
+    const isOwn = props.cardOwner === currentUser.id;
 
     // Creating a variable which you'll then set in `className` for the delete button
     const placeTrashClassName = (
@@ -27,7 +31,7 @@ const Card = (props) => {
     );
 
     // check if the user has liked a card
-    const isLiked = props.card.likes.some(i => i._id === props.currentUser);
+    const isLiked = props.card.likes.some(i => i._id === currentUser.id);
 
     // create a variable to set classname for like button
     const placeButtonClassName = (
