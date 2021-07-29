@@ -30,8 +30,7 @@ function Main(props) {
                         return (
                             <Card key={card._id} card={card} name={card.name} link={card.link} id={card._id}
                                 likes={card.likes.length} onCardClick={props.onCardClick} cardOwner={card.owner._id} 
-                                currentUser={currentUser.id} onCardLike={props.handleCardLike} 
-                                onCardDelete={props.handleCardDelete}/>
+                                onCardLike={props.handleCardLike} onCardDelete={props.handleCardDelete}/>
                         )
                     }
                     )
