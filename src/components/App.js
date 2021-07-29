@@ -27,7 +27,7 @@ function App() {
             setUserInfo(res);
             setAvatar(res.avatar);
         })
-        .catch(err => {console.log(err)})
+            .catch(err => { console.log(err) })
     }
 
     const setAvatar = (link) => {
@@ -37,7 +37,7 @@ function App() {
         }));
     }
 
-    const setUserInfo= (data) => {
+    const setUserInfo = (data) => {
         setCurrentUser((prevCurrentUser) => ({
             ...prevCurrentUser,
             name: data.name,
@@ -96,18 +96,19 @@ function App() {
             setUserInfo(data);
             closeAllPopups();
         })
-        .catch(err => {console.log(err)})
+            .catch(err => { console.log(err) })
     }
 
+    // change avatar in the server
     function handleUpdateAvatar(data) {
         api.changeAvatar(data).then(res => {
             setAvatar(data);
             closeAllPopups();
         })
-        .catch(err => {console.log(err)})
+            .catch(err => { console.log(err) })
     }
 
-// CARDS____________________________________________________________________________________________________________
+    // CARDS____________________________________________________________________________________________________________
 
     // Cards state variable
     const [cards, setCards] = React.useState([]);
@@ -140,13 +141,14 @@ function App() {
         handleConfirmDeleteClick(card);
     }
 
+    // confirm deletion of card
     function confirmDeleteClick() {
         api.deleteCard(cardForDelete._id).then(res => {
             setCards(cards.filter((cardItem) => cardItem._id !== cardForDelete._id))
             setCardForDelete();
             closeAllPopups();
-        }) 
-        .catch(err => { console.log(err) });
+        })
+            .catch(err => { console.log(err) });
     }
 
     // function for adding a card
@@ -155,15 +157,10 @@ function App() {
             setCards([res, ...cards])
             closeAllPopups();
         })
-        .catch(err => { console.log(err) });
+            .catch(err => { console.log(err) });
     }
-    function handleUpdateAvatar(data) {
-        api.changeAvatar(data).then(res => {
-            setAvatar(data);
-            closeAllPopups();
-        })
-        .catch(err => {console.log(err)})
-    }
+
+
 
 
     // Components
@@ -171,17 +168,17 @@ function App() {
 
         <div>
             <CurrentUserContext.Provider value={currentUser}>
-            <Header />
-            <Main onEditAvatarClick={handleEditAvatarClick} onEditProfileClick={handleEditProfileClick}
-                onAddPlaceClick={handleAddPlaceClick} onCardClick={handleCardClick} cards={cards} 
-                handleCardLike={handleCardLike} handleCardDelete={handleCardDelete}/>
-            <Footer />
-            <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
-            <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
-            <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddCard={addCardHandler}/>
-            <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
-            <ImagePopup card={selectedCard} onClose={closeAllPopups} />
-            <ConfirmDeletePopup isOpen={isConfirmDeletePopupOpen} onClose={closeAllPopups} cardDelete={confirmDeleteClick}/>
+                <Header />
+                <Main onEditAvatarClick={handleEditAvatarClick} onEditProfileClick={handleEditProfileClick}
+                    onAddPlaceClick={handleAddPlaceClick} onCardClick={handleCardClick} cards={cards}
+                    handleCardLike={handleCardLike} handleCardDelete={handleCardDelete} />
+                <Footer />
+                <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
+                <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
+                <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddCard={addCardHandler} />
+                <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
+                <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+                <ConfirmDeletePopup isOpen={isConfirmDeletePopupOpen} onClose={closeAllPopups} cardDelete={confirmDeleteClick} />
             </CurrentUserContext.Provider>
         </div>
     );
